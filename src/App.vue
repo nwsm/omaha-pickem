@@ -2,13 +2,13 @@
   <div id="app">
 <b-navbar toggleable="md" type="dark" variant="primary">
 
-  <router-link to='/'><b-navbar-brand>Omaha Pickem</b-navbar-brand></router-link>
+  <router-link to='/Main'><b-navbar-brand>Omaha Pickem</b-navbar-brand></router-link>
 
   <b-collapse is-nav id="nav_collapse">
 
-    <b-navbar-nav class="ml-auto" v-if="currentUser">
+    <b-navbar-nav class="ml-auto" v-if="$store.state.user">
 
-      <b-nav-item-dropdown :text="currentUser.email" right>
+      <b-nav-item-dropdown :text="$store.state.user.name" right>
         <b-dropdown-item v-on:click="logout">Signout</b-dropdown-item>
       </b-nav-item-dropdown>
     </b-navbar-nav>
@@ -27,14 +27,17 @@ export default {
   name: 'App',
   methods: {
     logout: function(){
-      firebase.auth().signOut();
-      this.$router.replace('Login')
+      this.$store.commit('updateUser',null)
+      this.$router.replace('/')
     }
   },
   computed: {
     currentUser: function(){
       return firebase.auth().currentUser;
     }
+  },
+  mounted: function() {
+
   }
 }
 </script>

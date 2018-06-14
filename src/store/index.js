@@ -3,15 +3,21 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-var s = {
-
-}
-
-var g = {
-
-}
-
 export default new Vuex.Store({
-  state: s,
-  getters: g
+  state: {
+    user: null,
+    bracketOneWinner: null,
+    bracketTwoWinner: null
+  },
+  mutations: {
+    updateUser (state, u) {
+      state.user = u
+    },
+    setBracketOneWinner (state, t) {
+      state.bracketOneWinner = t
+    },
+    setBracketTwoWinner (state, t) {
+      state.bracketTwoWinner = t
+    }
+  }
 })

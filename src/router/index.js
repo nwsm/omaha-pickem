@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import BootstrapVue from 'bootstrap-vue'
-import firebase from 'firebase'
+import store from '../store'
 
 import Main from '@/components/Main'
-import Login from '@/components/Login'
+import Home from '@/components/Home'
 import ViewBrackets from '@/components/ViewBrackets'
 import Bracket from '@/components/Bracket'
+import AuthReddit from '@/components/AuthReddit'
 
 Vue.use(Router)
 Vue.use(BootstrapVue)
@@ -16,19 +17,20 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VueRouter from 'vue-router';
 
 const router = new VueRouter({
+  mode: 'history',
   routes: [
     {
-      path: '/',
+      path: '/Main',
       name: 'Main',
       component: Main,
       meta: {
-        requiresAuth: true  //remove to allow anonymous entry
+        requiresAuth: true
       }
     },
     {
-      path: '/Login',
-      name: 'Login',
-      component: Login
+      path: '/',
+      name: 'Home',
+      component: Home
     },
     {
       path: '/ViewBrackets',
@@ -40,15 +42,21 @@ const router = new VueRouter({
       name: 'Bracket',
       component: Bracket,
       props: true
+    },
+    {
+      path: '/Auth/Reddit',
+      name: 'AuthReddit',
+      component: AuthReddit,
+      props: true
     }
   ]
 })
 
 router.beforeEach((to,from,next) => {
-  const currentUser = firebase.auth().currentUser;
+  const currentUser = store.state.user
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
   if (requiresAuth && !currentUser) {
-    next('/Login');
+    next('/');
   } else if (requiresAuth && currentUser) {
     next();
   } else {
