@@ -9,7 +9,7 @@
     </b-container>
     <h2>Your Bracket:</h2>
     <b-button :disabled="page<=1" @click="page--"> &lt; </b-button>
-    <b-button @click="save" :disabled="started"> Save</b-button>
+    <b-button @click="save" :disabled="started" v-if="!saving"> Save</b-button>
     <b-button :disabled="page>=3" @click="page++"> &gt; </b-button>
     <div class="brackets">
       <one v-show="page==1" @update="oneUpdate" :initialGames="bracketOne" :editable="true"></one>
@@ -50,12 +50,14 @@ export default {
       bracketOne: [{winner:null,loser:null},{winner:null,loser:null},{winner:null,loser:null},{winner:null,loser:null},{winner:null,loser:null},{winner:null,loser:null}],
       bracketTwo: [{winner:null,loser:null},{winner:null,loser:null},{winner:null,loser:null},{winner:null,loser:null},{winner:null,loser:null},{winner:null,loser:null}],
       bracketFinal: null,
-      bracketId: null
+      bracketId: null,
+      saving: false
     }
   },
   computed: {
     started() {
-      return Date.now() > 1529175600000
+      console.log(this.saving)
+      return Date.now() > 1529175600000 && this.saving
     }
   },
   methods: {
@@ -64,6 +66,7 @@ export default {
       this.$children[1].em();
       this.$children[2].em();
       this.$children[3].em();
+      vm.saving=true
       api.postBracket({
         bracketOne: vm.bracketOne,
         bracketTwo: vm.bracketTwo,
@@ -71,6 +74,7 @@ export default {
         uid: vm.$store.state.user.id,
         username: vm.$store.state.user.name
       },vm.bracketId).then(function(r){
+        vm.saving=false
         if(r[0])
           vm.bracketId=r[0].id
       })
