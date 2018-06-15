@@ -38,7 +38,7 @@ const router = new VueRouter({
       component: ViewBrackets
     },
     {
-      path: '/Bracket/:bracket',
+      path: '/Bracket/:bracketId',
       name: 'Bracket',
       component: Bracket,
       props: true

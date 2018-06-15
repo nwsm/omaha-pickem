@@ -5,15 +5,15 @@
         <ul>
             <li>&nbsp;</li>
 
-            <li class="game game-top teamHover" @click="ark">Oregon St</li>
+            <li class="game game-top teamHover" @click="ore">Oregon St</li>
             <li>&nbsp;</li>
-            <li class="game game-bottom teamHover" @click="tex">North Carolina</li>
+            <li class="game game-bottom teamHover" @click="nor">North Carolina</li>
 
             <li>&nbsp;</li>
 
-            <li class="game game-top teamHover" @click="tec">Mississippi St</li>
+            <li class="game game-top teamHover" @click="mis">Mississippi St</li>
             <li>&nbsp;</li>
-            <li class="game game-bottom teamHover" @click="flo">Washington</li>
+            <li class="game game-bottom teamHover" @click="was">Washington</li>
 
             <li>&nbsp;</li>
 
@@ -23,42 +23,42 @@
 
             <li>&nbsp;</li>
 
-            <li class="game game-top teamHover" @click="threeTop">{{loser1}}&nbsp;</li>
+            <li class="game game-top teamHover" @click="threeTop">{{games[0].loser}}&nbsp;</li>
             <li>&nbsp;</li>
-            <li class="game game-bottom teamHover" @click="threeBottom">{{loser2}}&nbsp;</li>
+            <li class="game game-bottom teamHover" @click="threeBottom">{{games[1].loser}}&nbsp;</li>
 
             <li>&nbsp;</li>
         </ul>
         <ul>
             <li>&nbsp;</li>
 
-            <li class="game game-top teamHover" @click="fourTop">{{winner1}}&nbsp;</li>
+            <li class="game game-top teamHover" @click="fourTop">{{games[0].winner}}&nbsp;</li>
             <li>&nbsp;</li>
-            <li class="game game-bottom teamHover" @click="fourBottom">{{winner2}}&nbsp;</li>
+            <li class="game game-bottom teamHover" @click="fourBottom">{{games[1].winner}}&nbsp;</li>
 
             <li>&nbsp;</li>
 
-            <li class="game game-top teamHover" @click="fiveTop">{{loser4}}&nbsp;</li>
+            <li class="game game-top teamHover" @click="fiveTop">{{games[3].loser}}&nbsp;</li>
             <li>&nbsp;</li>
-            <li class="game game-bottom teamHover" @click="fiveBottom">{{winner3}}&nbsp;</li>
-
-            <li>&nbsp;</li>
-        </ul>
-        <ul>
-            <li>&nbsp;</li>
-
-            <li class="game game-top teamHover" @click="sixTop">{{winner4}}&nbsp;</li>
-
-            <li>&nbsp;</li>
-
-            <li class="game game-bottom teamHover" @click="sixBottom">{{winner5}}&nbsp;</li>
+            <li class="game game-bottom teamHover" @click="fiveBottom">{{games[2].winner}}&nbsp;</li>
 
             <li>&nbsp;</li>
         </ul>
         <ul>
             <li>&nbsp;</li>
 
-            <li class="game game-bottom teamHover">{{winner6}}&nbsp;</li>
+            <li class="game game-top teamHover" @click="sixTop">{{games[3].winner}}</li>
+
+            <li>&nbsp;</li>
+
+            <li class="game game-bottom teamHover" @click="sixBottom">{{games[4].winner}}&nbsp;</li>
+
+            <li>&nbsp;</li>
+        </ul>
+        <ul>
+            <li>&nbsp;</li>
+
+            <li class="game game-bottom teamHover">{{games[5].winner}}&nbsp;</li>
 
             <li>&nbsp;</li>
         </ul>
@@ -69,66 +69,110 @@
 <script>
 export default {
   name: 'One',
+  props: ['initialGames','editable'],
   data: function() {
     return {
-      winner1: null,
-      loser1: null,
-      winner2: null,
-      loser2: null,
-      winner3: null,
-      loser3: null,
-      winner4: null,
-      loser4: null,
-      winner5: null,
-      loser5: null,
-      winner6: null,
-      loser6: null
+
     }
   },
+  mounted: function() {
+
+  },
+  computed: {
+    games: function(){
+      return this.initialGames
+    }
+  },
+
   methods: {
-    ark: function() {
-      this.loser1 = 'North Carolina'
-      this.winner1 = 'Oregon St'
+    em: function(){
+      this.$emit('update',this.games)
     },
-    tex: function() {
-      this.loser1 = 'Oregon St'
-      this.winner1 = 'North Carolina'
+    propLoss: function(team,start){
+      if(!team)
+        return
+      for(let i=start; i<this.games.length; i++){
+        if(this.games[i].winner==team)
+          this.games[i].winner=null
+        if(this.games[i].loser==team)
+          this.games[i].loser=null
+      }
     },
-    tec: function() {
-      this.loser2 = 'Washington'
-      this.winner2 = 'Mississippi St'
+    ore: function() {
+      if(!this.editable) return
+      this.propLoss('North Carolina',1)
+      this.propLoss('Oregon St',1)
+      this.games[0].loser = 'North Carolina'
+      this.games[0].winner = 'Oregon St'
     },
-    flo: function() {
-      this.loser2 = 'Mississippi St'
-      this.winner2 = 'Washington'
+    nor: function() {
+      if(!this.editable) return
+      this.propLoss('North Carolina',1)
+      this.propLoss('Oregon St',1)
+      this.games[0].loser = 'Oregon St'
+      this.games[0].winner = 'North Carolina'
+    },
+    mis: function() {
+      if(!this.editable) return
+      this.propLoss('Washington',2)
+      this.propLoss('Mississippi St',2)
+      this.games[1].loser = 'Washington'
+      this.games[1].winner = 'Mississippi St'
+    },
+    was: function() {
+      if(!this.editable) return
+      this.propLoss('Mississippi St',2)
+      this.propLoss('Washington',2)
+      this.games[1].loser = 'Mississippi St'
+      this.games[1].winner = 'Washington'
     },
     threeTop: function() {
-      this.winner3 = this.loser1
+      if(!this.editable) return
+      this.propLoss(this.games[2].winner,3)
+      this.propLoss(this.games[2].loser,3)
+      this.games[2].winner = this.games[0].loser
     },
     threeBottom: function() {
-      this.winner3 = this.loser2
+      if(!this.editable) return
+      this.propLoss(this.games[2].winner,3)
+      this.propLoss(this.games[2].loser,3)
+      this.games[2].winner = this.games[1].loser
     },
     fourTop: function() {
-      this.winner4 = this.winner1
-      this.loser4 = this.winner2
+      if(!this.editable) return
+      this.propLoss(this.games[3].winner,4)
+      this.propLoss(this.games[3].loser,4)
+      this.games[3].winner = this.games[0].winner
+      this.games[3].loser = this.games[1].winner
     },
     fourBottom: function() {
-      this.winner4 = this.winner2
-      this.loser4 = this.winner1
+      if(!this.editable) return
+      this.propLoss(this.games[3].winner,4)
+      this.propLoss(this.games[3].loser,4)
+      this.games[3].winner = this.games[1].winner
+      this.games[3].loser = this.games[0].winner
     },
     fiveTop: function() {
-      this.winner5 = this.loser4
+      if(!this.editable) return
+      this.propLoss(this.games[4].winner,4)
+      this.propLoss(this.games[4].loser,4)
+      this.games[4].winner = this.games[3].loser
     },
     fiveBottom: function() {
-      this.winner5 = this.winner3
+      if(!this.editable) return
+      this.propLoss(this.games[4].winner,4)
+      this.propLoss(this.games[4].loser,4)
+      this.games[4].winner = this.games[2].winner
     },
     sixTop: function() {
-      this.winner6 = this.winner4
-      this.$store.commit('setBracketOneWinner',this.winner6)
+      if(!this.editable) return
+      this.games[5].winner = this.games[3].winner
+      this.$store.commit('setBracketOneWinner',this.games[5].winner)
     },
     sixBottom: function() {
-      this.winner6 = this.winner5
-      this.$store.commit('setBracketOneWinner',this.winner6)
+      if(!this.editable) return
+      this.games[5].winner = this.games[4].winner
+      this.$store.commit('setBracketOneWinner',this.games[5].winner)
     }
   }
 }

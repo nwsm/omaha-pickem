@@ -5,18 +5,18 @@
         <ul>
             <li>&nbsp;</li>
 
-            <li class="game game-top teamHover" @click="top">{{$store.state.bracketOneWinner}}</li>
+            <li class="game game-top teamHover" @click="top">{{$store.state.bracketOneWinner}}&nbsp;</li>
 
             <li>&nbsp;</li>
 
-            <li class="game game-bottom teamHover" @click="bottom">{{$store.state.bracketTwoWinner}}</li>
+            <li class="game game-bottom teamHover" @click="bottom">{{$store.state.bracketTwoWinner}}&nbsp;</li>
 
             <li>&nbsp;</li>
         </ul>
         <ul>
             <li>&nbsp;</li>
 
-            <li class="game game-bottom teamHover">{{winner}}&nbsp;</li>
+            <li class="game game-bottom teamHover">{{unsynced ? null : winner}}&nbsp;</li>
 
             <li>&nbsp;</li>
         </ul>
@@ -27,16 +27,36 @@
 <script>
 export default {
   name: 'Final',
+  props: ['initialWinner','editable'],
   data: function() {
     return {
-      winner: null
+      winner: this.initialWinner
+    }
+  },
+  mounted: function(){
+
+  },
+  computed: {
+    unsynced: function(){
+      if(this.winner!=this.$store.state.bracketOneWinner&&this.winner!=this.$store.state.bracketTwoWinner)
+        this.winner=null
+    }
+  },
+  watch: {
+    initialWinner: function(v){
+      this.winner = v
     }
   },
   methods: {
+    em: function(){
+      this.$emit('update',this.winner)
+    },
     top: function(){
+      if(!this.editable) return
       this.winner=this.$store.state.bracketOneWinner
     },
     bottom: function(){
+      if(!this.editable) return
       this.winner=this.$store.state.bracketTwoWinner
     }
   }

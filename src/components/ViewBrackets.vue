@@ -1,8 +1,10 @@
 <template>
   <div>
+    <router-link to='/Main'><p>Your Bracket</p></router-link>
     <h2>All Brackets</h2>
     <template v-for="bracket in brackets">
-      <router-link :to="{ name: 'Bracket', params: {bracket: bracket } }">{{bracket.data.f3 ? bracket.data.f3 : bracket.data.f2}}</router-link>
+      <router-link :to="{ name: 'Bracket', params: {bracketId: bracket.id } }">{{bracket.data.username}}: {{bracket.data.bracketFinal}}</router-link>
+      <br>
     </template>
   </div>
 </template>

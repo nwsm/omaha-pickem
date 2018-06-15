@@ -11,7 +11,40 @@ export default {
     r.forEach((doc) => {
       results.push({id:doc.id, data:doc.data()});
     });
-
     return results
+  },
+  postBracket: async function(bracket, uid) {
+    var db = firebase.firestore()
+    db.settings({timestampsInSnapshots: true})
+    if(uid)
+      var setDoc = db.collection('brackets').doc(uid).set(bracket)
+    else
+      var setDoc = db.collection('brackets').doc().set(bracket)
+  },
+  findBracket: async function(uid) {
+    var results = []
+    var db = firebase.firestore()
+    db.settings({timestampsInSnapshots: true})
+
+    var bracketsRef = db.collection('brackets');
+    var queryRef = bracketsRef.where('uid', '==', uid);
+    var r = await queryRef.get()
+    r.forEach((doc) => {
+      results.push( {id:doc.id, data:doc.data()} )
+    })
+    return results
+  },
+  getBracket: async function(bracketId) {
+    var db = firebase.firestore()
+    db.settings({timestampsInSnapshots: true})
+    var bracketRef = await db.collection('brackets').doc(bracketId);
+    var doc = await bracketRef.get()
+
+    if (!doc.exists) {
+      return null
+    } else {
+      return({id:doc.id, data:doc.data()});
+    }
+
   }
 }
