@@ -70,7 +70,10 @@ export default {
         bracketFinal: vm.bracketFinal,
         uid: vm.$store.state.user.id,
         username: vm.$store.state.user.name
-      },vm.bracketId);
+      },vm.bracketId).then(function(r){
+        if(r[0])
+          vm.bracketId=r[0].id
+      })
 
     },
     oneUpdate: function(v){

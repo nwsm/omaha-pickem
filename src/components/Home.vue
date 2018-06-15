@@ -10,6 +10,9 @@
     let url = 'https://serene-kepler-9a1365.netlify.com'
     //let url = 'http://localhost:8080'
 
+    let client = 'ZmJX96wHgxC4Fg'
+    //let client = 'HAEMR5Q9nUxHjw'
+
   export default {
     name: 'Home',
     data: function() {
@@ -22,7 +25,7 @@
     },
     methods: {
       signInWithReddit: function () {
-        window.location = "https://www.reddit.com/api/v1/authorize?client_id=ZmJX96wHgxC4Fg&response_type=token&state=kek&redirect_uri="+url+"&scope=identity"
+        window.location = "https://www.reddit.com/api/v1/authorize?client_id="+client+"&response_type=token&state=kek&redirect_uri="+url+"&scope=identity"
       }
     },
     mounted: function() {

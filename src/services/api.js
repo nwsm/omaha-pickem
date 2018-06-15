@@ -13,13 +13,19 @@ export default {
     });
     return results
   },
-  postBracket: async function(bracket, uid) {
+  postBracket: async function(bracket, id) {
     var db = firebase.firestore()
     db.settings({timestampsInSnapshots: true})
-    if(uid)
-      var setDoc = db.collection('brackets').doc(uid).set(bracket)
-    else
-      var setDoc = db.collection('brackets').doc().set(bracket)
+    var vm = this
+    let setDoc
+    if(id){
+      setDoc = db.collection('brackets').doc(id).set(bracket)
+      return bracket.uid
+    }
+    else {
+      setDoc = await db.collection('brackets').doc().set(bracket)
+      return vm.findBracket(bracket.uid)
+    }
   },
   findBracket: async function(uid) {
     var results = []

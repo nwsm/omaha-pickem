@@ -55,7 +55,7 @@ router.beforeEach((to,from,next) => {
   const currentUser = store.state.user
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
   if(to.path.substring(0,7) == '/access'){
-    var token = to.path.substring(14,50)
+    var token = to.path.substring(14,to.path.indexOf('&'))
     next('/Auth/Reddit#access_token='+token)
   }
   if (requiresAuth && !currentUser) {
