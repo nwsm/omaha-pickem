@@ -56,17 +56,16 @@ export default {
   },
   computed: {
     started() {
-      console.log(this.saving)
-      return Date.now() > 1529175600000 && this.saving
+      return Date.now() > 1529175600000
     }
   },
   methods: {
     save: function() {
       var vm = this
+      vm.saving=true
       this.$children[1].em();
       this.$children[2].em();
       this.$children[3].em();
-      vm.saving=true
       api.postBracket({
         bracketOne: vm.bracketOne,
         bracketTwo: vm.bracketTwo,
