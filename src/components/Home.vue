@@ -7,6 +7,9 @@
 
 <script>
   import firebase from 'firebase'
+    let url = 'https://serene-kepler-9a1365.netlify.com'
+    //let url = 'http://localhost:8080'
+
   export default {
     name: 'Home',
     data: function() {
@@ -19,7 +22,7 @@
     },
     methods: {
       signInWithReddit: function () {
-        window.location = "https://www.reddit.com/api/v1/authorize?client_id=ZmJX96wHgxC4Fg&response_type=token&state=kek&redirect_uri=http://localhost:8080/Auth/Reddit&scope=identity"
+        window.location = "https://www.reddit.com/api/v1/authorize?client_id=ZmJX96wHgxC4Fg&response_type=token&state=kek&redirect_uri="+url+"&scope=identity"
       }
     },
     mounted: function() {

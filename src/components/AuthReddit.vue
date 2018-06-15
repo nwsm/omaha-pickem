@@ -22,7 +22,7 @@ export default {
     }, {});
 
     var token = 'bearer '+params.access_token
-
+    console.log(token)
     axios.get("https://oauth.reddit.com/api/v1/me",{
       headers: {
         "Authorization": token
