@@ -4,7 +4,7 @@
   "description": "A quick template including a boostrap-vue navbar and sign-in options for email and google through firebase.",
   "author": "Eric Newsom",
   "private": false,
-  "homepage": "https://github.com/nwsm/bootstrap-vue-firebase-template",
+  "homepage": "https://github.com/nwsm/omaha-pickem",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
@@ -49,7 +49,7 @@
     "shelljs": "^0.7.6",
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
-    "vue-gh-pages": "^1.16.0",
+    "vue-gh-pages": "^1.16.3",
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
