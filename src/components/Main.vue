@@ -62,6 +62,8 @@ export default {
   methods: {
     save: function() {
       var vm = this
+      if(vm.saving)
+        return
       vm.saving=true
       this.$children[1].em();
       this.$children[2].em();
