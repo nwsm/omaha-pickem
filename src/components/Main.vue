@@ -79,7 +79,7 @@ export default {
         if(r[0])
           vm.bracketId=r[0].id
       })
-
+      alert('Saving!')
     },
     oneUpdate: function(v){
       this.bracketOne=v

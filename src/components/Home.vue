@@ -7,11 +7,11 @@
 
 <script>
   import firebase from 'firebase'
-    let url = 'https://serene-kepler-9a1365.netlify.com'
-    //let url = 'http://localhost:8080'
+    //let url = 'https://serene-kepler-9a1365.netlify.com'
+    let url = 'http://localhost:8080'
 
-    let client = 'ZmJX96wHgxC4Fg'
-    //let client = 'HAEMR5Q9nUxHjw'
+    //let client = 'ZmJX96wHgxC4Fg'
+    let client = 'HAEMR5Q9nUxHjw'
 
   export default {
     name: 'Home',
