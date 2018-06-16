@@ -76,8 +76,9 @@ export default {
         username: vm.$store.state.user.name
       },vm.bracketId).then(function(r){
         vm.saving=false
-        if(r[0])
+        if(r[0].id){
           vm.bracketId=r[0].id
+        }
       })
       alert('Saving!')
     },
