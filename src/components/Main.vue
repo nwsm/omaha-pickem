@@ -9,7 +9,7 @@
     </b-container>
     <h2>Your Bracket:</h2>
     <b-button :disabled="page<=1" @click="page--"> &lt; </b-button>
-    <b-button @click="save" :disabled="started" v-if="!saving"> Save</b-button>
+    <b-button @click="save" :disabled="started" v-if="!saving">Tournament has started!</b-button>
     <b-button :disabled="page>=3" @click="page++"> &gt; </b-button>
     <div class="brackets">
       <one v-show="page==1" @update="oneUpdate" :initialGames="bracketOne" :editable="true"></one>
