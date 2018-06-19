@@ -38,17 +38,17 @@ export default {
         {
           key: 'champion',
           sortable: true,
-          label: 'Champion'
+          label: 'Champ'
         },
         {
           key: 'runnerUp',
           sortable: true,
-          label: 'Runner Up'
+          label: '2nd'
         },
         {
           key: 'appearances',
           sortable: true,
-          label: 'Final Appearances'
+          label: 'In Final'
         }
       ],
       fields: [
