@@ -1,10 +1,6 @@
-# bootstrap-vue-firebase-template
+# omaha-pickem
 
-> A quick template including a boostrap-vue navbar and sign-in options for email and google through firebase.
-
-> Just put in your firebase credentials in src/config/index.js
-
-Demo: https://nwsm.github.io/hypobetical/#/
+> A March Madness style pickem game for the College Baseball World Series.
 
 ## Uses:
 
@@ -33,5 +29,3 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
