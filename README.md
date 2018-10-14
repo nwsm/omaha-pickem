@@ -1,6 +1,7 @@
 # omaha-pickem
 
-> A March Madness style pickem game for the College Baseball World Series.
+A March Madness style pickem game for the College Baseball World Series.
+https://github.com/nwsm/omaha-pickem/blob/master/README.md
 
 ## Uses:
 
